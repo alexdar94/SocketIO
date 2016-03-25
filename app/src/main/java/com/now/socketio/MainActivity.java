@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         try{
             socket = IO.socket("http://192.168.136.21:3000");
-            socket.on("message from pc", onNewMessage);
+            socket.on("message", onNewMessage);
             socket.on("time", onTimeReceiver);
             socket.connect();
         }catch (URISyntaxException e){throw new RuntimeException(e);}
@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.e("received","message");
                     JSONObject data = (JSONObject) args[0];
                     String time;
                     try {
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         socket.disconnect();
-        socket.off("message from pc", onNewMessage);
+        socket.off("message", onNewMessage);
         socket.off("time", onTimeReceiver);
     }
 }
