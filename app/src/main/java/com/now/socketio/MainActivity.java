@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try{
-            socket = IO.socket("http://192.168.136.21:3000");
+            socket = IO.socket("http://192.168.1.72:3000");
             socket.on("message", onNewMessage);
             socket.on("time", onTimeReceiver);
             socket.connect();
